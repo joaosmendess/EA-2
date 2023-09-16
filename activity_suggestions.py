@@ -1,41 +1,40 @@
-def main (): 
-    continuar= "sim"
+def obter_sugestao(clima, hora, horas_livres):
+    # Matriz de sugestões com base no clima e na hora
+     sugestoes = {
+        "chuvoso": {
+            "manhã": "Leia um livro",
+            "tarde": "Assista a um filme",
+            "noite": "Ouça música relaxante"
+        },
+        "ensolarado": {
+            "manhã": "Faça uma caminhada",
+            "tarde": "Vá nadar",
+            "noite": "Contemple as estrelas"
+        },
+        "nublado": {
+            "manhã": "Faça yoga",
+            "tarde": "Visite um museu",
+            "noite": "Prepare um chá e relaxe"
+        }
+    }
+     
+
+     atividade = sugestoes.get(clima, {}).get(hora, "Descanse")
+     tempo_sugerido = horas_livres / 2
+
+     return f"{atividade} por {tempo_sugerido} horas."
 
 
-
-    while continuar=="sim":
-        #Entrada de dados 
-        clima = input("qual o clima ? (chuvoso, ensolarado, nublado):")
-        hora = input ("Qual a hora do dia? (manhã, tarde, noite):")
-        horas_livres = float(input("quantas horas você tem livres agora?"))
- 
-          # Calcula o tempo sugerido para a atividade
-        tempo_sugerido = horas_livres / 2  # supondo que use metade do tempo livre
+def main():
+    continuar = "sim"
+    while continuar == "sim":
+        # Entrada de dados
+        clima = input("Qual o clima? (chuvoso, ensolarado, nublado):")
+        hora = input("Qual a hora do dia? (manhã, tarde, noite):")
+        horas_livres = float(input("Quantas horas você tem livres agora?"))
         
-        # Sugestões com base no clima e hora
-        if clima == "chuvoso":
-            if hora == "manhã":
-                print(f"Leia um livro por {tempo_sugerido} horas.")
-            elif hora == "tarde":
-                print(f"Assista a um filme por {tempo_sugerido} horas.")
-            else:
-                print(f"Ouça música relaxante por {tempo_sugerido} horas.")
-
-        elif clima == "ensolarado":
-            if hora == "manhã":
-                print(f"Faça uma caminhada por {tempo_sugerido} horas.")
-            elif hora == "tarde":
-                print(f"Vá nadar por {tempo_sugerido} horas.")
-            else:
-                print(f"Contemple as estrelas por {tempo_sugerido} horas.")
-
-        else:  # assumindo nublado
-            if hora == "manhã":
-                print(f"Faça yoga por {tempo_sugerido} horas.")
-            elif hora == "tarde":
-                print(f"Visite um museu por {tempo_sugerido} horas.")
-            else:
-                print(f"Prepare um chá e relaxe por {tempo_sugerido} horas.")
+        sugestao = obter_sugestao(clima, hora, horas_livres)
+        print(sugestao)
         
         # Pergunta se o usuário quer continuar
         continuar = input("Deseja continuar? (sim/não) ").lower()
